@@ -11,6 +11,8 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.concurrent.locks.StampedLock;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.utl.coyotech.model.Clase;
 import org.utl.coyotech.model.Plan;
 
@@ -25,7 +27,7 @@ public class ControllerAlumno {
         //Se crea objeto para la conexion con la base de datos
         MySQLConnection conMySQL = new MySQLConnection();
         //Se crea la query que llamara al procedure para insertar un nuevo Alumno y lo relaciona con un pago;
-        String insertQuery = "{call InsertarAlumno(?,?,?,?,?,?,?,?,?)}";
+        String insertQuery = "{call insertarAlumno(?,?,?,?,?,?,?,?,?)}";
         // Consulta para obtener el último ID insertado
         String idQuery = "SELECT LAST_INSERT_ID() AS id";
         int idAlumno = 0;
@@ -120,10 +122,11 @@ public class ControllerAlumno {
     }
 
     public ArrayList<Alumno> getAllAlumnos() {
+        MySQLConnection conMySQL = new MySQLConnection();
+        ArrayList<Alumno> alumnos = new ArrayList<>();
+        String query = "SELECT * FROM view_alumnos";
         try {
-            MySQLConnection conMySQL = new MySQLConnection();
-            ArrayList<Alumno> alumnos = new ArrayList<>();
-            String query = "SELECT * FROM view_alumnos";
+
             Connection conn = conMySQL.open();
             PreparedStatement pstmt = conn.prepareStatement(query);
             ResultSet rs = pstmt.executeQuery();
@@ -131,13 +134,40 @@ public class ControllerAlumno {
             rs.close();
             conn.close();
             conMySQL.close();
-            System.out.println("ControllerAlumno.getAll:" +alumnos.toString());
+            System.out.println("ControllerAlumno.getAll:" + alumnos.toString());
             return alumnos;
 
         } catch (SQLException e) {
             e.printStackTrace();
         }
         System.out.println("ControllerAlumno.getAll: algo salió mal...");
+        return null;
+    }
+
+    public ArrayList<Alumno> buscarAlumno(String parametro) {
+        try {
+            ArrayList<Alumno> alumnos = new ArrayList<>();
+            MySQLConnection conMySQL = new MySQLConnection();
+            String query = "SELECT * FROM view_Alumnos WHERE "
+                    + "nombre LIKE ? OR "
+                    + "apellidoPaterno LIKE ? OR "
+                    + "apellidoMaterno LIKE ? OR "
+                    + "correo LIKE ? OR "
+                    + "telefono LIKE ?;";
+            Connection conn = conMySQL.open();
+            PreparedStatement pstmt = conn.prepareCall(query);
+            for (int i = 1; i <= 5; i++) {
+                pstmt.setString(i, "%" + parametro + "%");
+            }
+
+            ResultSet rs = pstmt.executeQuery();
+            alumnos = listaAlumnos(rs);
+            System.out.println("ControllerAlumno.buscarAlumno:" + alumnos.toString());
+            return alumnos;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        System.out.println("ControllerAlumno.buscarAlumno: algo salió mal...");
         return null;
     }
 

@@ -1,22 +1,56 @@
+/*
+Datos precargados para probar funciones
+*/
+
+SELECT * FROM plan;
+SELECT * FROM clase;
+SELECT * FROM alumno;
+SELECT * FROM pago;
+
 USE amarstudio;
 
 /*Insert Usuario*/
 INSERT INTO usuario(nombreUsuario, contrasenia)
 			VALUES ("admin", "admin");
+            
+/*Insert de Plan*/
+INSERT INTO plan(nombrePlan,precio,capacidad,descripcion)
+			VALUES ("Individual", 1600.00, 1, "Clase con atencion personalizada a un unico alumno");
 
-/*Insert planes*/
-INSERT INTO plan(nombrePlan,precio,capacidad,descripcion,estatus)
-			VALUES("individual",1200.00,1,"Clase de canto individual",1);
+INSERT INTO plan(nombrePlan,precio,capacidad,descripcion)
+			VALUES ("Doble", 1200.00, 2, "Clase para 2 Alumnos simultaneamente");
+            
+INSERT INTO plan(nombrePlan,precio,capacidad,descripcion)
+			VALUES ("Grupal", 800.00, 8, "Clase grupal");
 
-/*Insert Clases*/
-INSERT INTO clase(nombreClase,dia,horaInicio,horaFin,estatus,idPlan)
-		VALUES("Clase Individual","Lunes",'17:00:00','17:50:00',1,1);
+/*Insert de Clase*/
 
-/*Insert Alumnos*/
-INSERT INTO alumno(nombre,apellidoPaterno,apellidoMaterno,fechaNacimiento,fechaRegistro,correo,telefono,estatus,idClase)
-			VALUES("Cristian","Rizo","Gomez","2003-02-13","2024-02-29","rizo@gmail.com","4771237896",1,1);
+INSERT INTO clase(nombreClase,dia,horaInicio,horaFin,idPlan)
+			VALUES("CI LEONARDO SANCHEZ","Lunes",'10:00:00','11:00:00',1);
+            
+INSERT INTO clase(nombreClase,dia,horaInicio,horaFin,idPlan)
+			VALUES("CI_DISPONIBLE","Lunes",'11:00:00','12:00:00',1);
+            
+INSERT INTO clase(nombreClase,dia,horaInicio,horaFin,idPlan)
+			VALUES("CD_EberYOrlando","Martes",'12:00:00','13:00:00',2);
+            
+INSERT INTO clase(nombreClase,dia,horaInicio,horaFin,idPlan)
+			VALUES("CI_DISPONIBLE","Martes",'11:00:00','12:00:00',1);
 
-/*Insert pagos*/
+INSERT INTO clase(nombreClase,dia,horaInicio,horaFin,idPlan)
+			VALUES("CG_Mi1213","Miercoles",'12:00:00','13:00:00',3);
+
+/*Insert de Alumno*/
+INSERT INTO alumno(nombre,apellidoPaterno,apellidoMaterno,fechaNacimiento,fechaRegistro,correo,telefono,idClase)
+			VALUES("Leonardo","Sanchez","Martinez","2002/08/29","2023/01/01","leo@gmail.com","4771234568",1);
+
+INSERT INTO alumno(nombre,apellidoPaterno,apellidoMaterno,fechaNacimiento,fechaRegistro,correo,telefono,idClase)
+			VALUES("Eber","Olivarez","Gutierrez","2002/11/28","2023/02/01","eber@gmail.com","4777896814",2);
+
+INSERT INTO alumno(nombre,apellidoPaterno,apellidoMaterno,fechaNacimiento,fechaRegistro,correo,telefono,idClase)
+			VALUES("Orlando","Nuñez","Camargo","2002/05/28","2023/02/02","orlando@gmail.com","4777897814",2);
 
 
-/*Procedimientos almacenados*/
+            
+
+

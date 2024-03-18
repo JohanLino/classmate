@@ -13,10 +13,12 @@ import org.utl.coyotech.model.Clase;
 public class AlumnoPruebas {
 
     public static void main(String[] args) {
-        //        probarInsertar();
-        //          probarModifyAlumno();
-        probarGetAll();
-        System.out.println("Hola estoy probando git");
+
+        //probarGetAll()
+        //probarBusquedaAlumno();
+        //probarInactivar();
+        //probarActivar();
+        //
 
     }
 
@@ -54,4 +56,18 @@ public class AlumnoPruebas {
 
     }
 
+    public static void probarInactivar() {
+        ControllerAlumno ca = new ControllerAlumno();
+        System.out.println(ca.inactiveAlumno(1));
+    }
+
+    public static void probarActivar() {
+        ControllerAlumno ca = new ControllerAlumno();
+        System.out.println(ca.activarAlumno(1));
+    }
+
+    public static void probarBusquedaAlumno() {
+        ControllerAlumno ca = new ControllerAlumno();
+        ca.buscarAlumno("Or");
+    }
 }

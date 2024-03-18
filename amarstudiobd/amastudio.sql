@@ -4,7 +4,9 @@ AMARSTUDIO V2
 CREADA POR: COYOTECH
 FECHA:15/02/2024
 ACTUALIZADO POR: JOHAN LINO
-ACTULIZACION:28/02/2024
+ACTULIZACION:13/03/2024
+
+Nota de actualizacion: Se modificó la capacidad del campo Dia en la tabla Clase
 */
 
 
@@ -39,7 +41,7 @@ al idPlan para poder saber el cobro correspondiente ya*/
 CREATE TABLE IF NOT EXISTS clase(
 idClase INT PRIMARY KEY AUTO_INCREMENT,
 nombreClase VARCHAR(50) NOT NULL,
-dia VARCHAR(8) NOT NULL,
+dia VARCHAR(9) NOT NULL,
 horaInicio TIME NOT NULL, /* Formato datos time 'HH:MM:SS'*/
 horaFin TIME NOT NULL,
 estatus INT NOT NULL DEFAULT 1, /*0=INACTIVO 1=ACTIVO*/
@@ -57,7 +59,7 @@ idAlumno INT PRIMARY KEY AUTO_INCREMENT,
 nombre VARCHAR(50) NOT NULL,
 apellidoPaterno VARCHAR(50) NOT NULL,
 apellidoMaterno VARCHAR(50) NOT NULL,
-fechaNacimiento DATE NOT NULL,
+fechaNacimiento DATE NOT NULL, /*"YYYY-MM-DD"*/
 fechaRegistro DATE NOT NULL,
 correo VARCHAR(50) NOT NULL,
 telefono VARCHAR(50) NOT NULL,
